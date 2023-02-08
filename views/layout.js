@@ -20,7 +20,7 @@ module.exports = ([user], props) => {
             child: {
                 type: "view",
                 name: "navigation",
-                coll: "guild",
+                coll: "guilds",
                 query: {
                     "_id": user.selectedGuild
                 },
