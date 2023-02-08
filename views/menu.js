@@ -50,7 +50,7 @@ module.exports = (data, {user}) => {
             return {
               type: "view",
               name: "menuItem",
-              coll: "guild",
+              coll: "guilds",
               query: {
                 "_id": item.guild
               },
