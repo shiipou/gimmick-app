@@ -54,7 +54,9 @@ module.exports = ([item], {user, action="selectGuild", color, isSelected, isOwne
         value: item.name.replace("_", " ").replace("-", " ").split(" ").map((word) => word[0]).join("").slice(0, 3).toUpperCase(),
         textAlign: "center",
         style: {
-          height: 1.9
+          height: 1.9,
+          fontWeight: isSelected ? "bold": "normal",
+          fontStyle: isSelected ? "normal": "italic"
         }
       },
     }

@@ -34,7 +34,7 @@ module.exports = {
     async available(api, username, tag) {
         if(!username) throw new Error("Username is required to check if it is available.")
         if(!tag) throw new Error("Tag is required to check if it is available.")
-        return find(api,  username, tag).then((value) => {
+        return this.find(api,  username, tag).then((value) => {
             return value == undefined
         })
     }
