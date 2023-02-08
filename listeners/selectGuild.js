@@ -5,8 +5,6 @@ const userService = require("../services/user")
 module.exports = async ({guild}, event, api) => {
     var user = await userService.get(api)
 
-    console.log("selectGuild", user, guild)
-    
     if(!guild){
         return userService.update(api, {
             ...user,

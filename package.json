@@ -1,13 +1,13 @@
 {
-  "name": "javascript-template",
-  "version": "1.0.0",
-  "description": "Lenra's javascript template",
+  "name": "gimmick",
+  "version": "1.0.0-beta.1",
+  "description": "Gimmick, Your git trick to async your collaboration.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
-  "author": "Lenra",
+  "author": "Shiipou",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.27.1",

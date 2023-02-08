@@ -3,10 +3,23 @@
 module.exports = (data, props) => {
   return {
     type: "view",
-    name: "navigation",
-    coll: "users",
-    query: {
-      "id": "@me"
+    name: "appGuard",
+    coll: "app",
+    query: { },
+    props: {
+      "page": [{
+        "name": "userGuard",
+        "coll": "users",
+        "query": {
+          "id": "@me"
+        }
+      }, {
+        "name": "layout",
+        "coll": "users",
+        "query": {
+          "id": "@me"
+        }
+      }]
     }
   }
 }

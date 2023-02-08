@@ -54,7 +54,7 @@ module.exports = (data, {user}) => {
                 "_id": item.guild
               },
               props: {
-                  "isSelected": user.selectedGuild === item.guild,
+                  "isSelected": user.selectedGuild == item.guild,
                   "isOwner": item.owner == user.id,
                   "color": item.color
               }

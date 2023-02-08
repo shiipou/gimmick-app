@@ -1,31 +1,12 @@
 'use strict'
 
-module.exports = ([user], props) => {
-    if(user.username == null) {
-        user.navigation = "register"
+module.exports = ([guild], {user}) => {
+  return {
+    type: "view",
+    name: user.navigation,
+    props: {
+      user,
+      guild
     }
-
-    switch (user.navigation) {
-        case "register":
-            return {
-                type: "view",
-                name: "register"
-            }
-        case "createGuild":
-            return {
-                type: "view",
-                name: "createGuild",
-                props: {
-                    user
-                }
-            }
-        default:
-            return {
-                type: "view",
-                name: "layout",
-                props: {
-                    user
-                }
-            }
-    }
+  }
 }

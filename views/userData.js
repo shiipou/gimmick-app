@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = ([user], props) => {
+module.exports = (data, props) => {
     console.log("User data: ", props.user)
     return {
         type: "text",

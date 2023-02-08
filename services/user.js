@@ -1,6 +1,5 @@
 'use strict'
 
-const { default: axios } = require("axios");
 const apiServices = require('./api');
 
 module.exports = {
@@ -15,11 +14,11 @@ module.exports = {
     },
     async create(api, data) {
         if(!data) throw new Error("User data is required to create a new user.")
-        return apiServices.createDoc(api, "users", data);
+        return apiServices.createDoc(api, "users", data).then((value) => value.data)
     },
     async update(api, data) {
         if(!data._id) throw new Error("User ID is required to update user data.")
-        return apiServices.updateDoc(api, "users", data)
+        return apiServices.updateDoc(api, "users", data).then((value) => value.data)
     },
     async find(api, username, tag) {
         if(!username) throw new Error("Username is required to find a user.")

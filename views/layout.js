@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = (data, {user}) => {
+module.exports = ([user], props) => {
     return {
         type: "flex",
         direction: "horizontal",
@@ -11,18 +11,21 @@ module.exports = (data, {user}) => {
             name: "menu",
             coll: "guild_users",
             query: {
-                "user": user._id
+                "user": user.id
             },
             props: { user }
         },
         {
-            type: "view",
-            name: "home",
-            coll: "guild",
-            query: {
-                "_id": user.selectedGuild
-            },
-            props: { user }
+            type: "flexible",
+            child: {
+                type: "view",
+                name: "navigation",
+                coll: "guild",
+                query: {
+                    "_id": user.selectedGuild
+                },
+                props: { user }
+            }
         }]
     }
 }
