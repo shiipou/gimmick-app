@@ -4,7 +4,7 @@ module.exports = ([item], {user, action="selectGuild", color, isSelected, isOwne
   if (itemOveride) {
     item = {...item, ...itemOveride}
   }
-  console.log("Rendering item", item)
+  console.log("Rendering guild", item, action)
 
   return {
     type: "actionable",

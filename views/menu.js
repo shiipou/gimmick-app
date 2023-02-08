@@ -46,6 +46,7 @@ module.exports = (data, {user}) => {
           fillParent: true,
           direction: "vertical",
           children: [...data.map((item) => {
+            console.log("Rendering item", item)
             return {
               type: "view",
               name: "menuItem",
@@ -63,7 +64,6 @@ module.exports = (data, {user}) => {
             type: "view",
             name: "menuItem",
             props: {
-              user,
               item: {
                 name: "+",
               },
