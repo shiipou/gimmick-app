@@ -1,21 +1,11 @@
 'use strict'
 
-const apiService = require('../services/api');
+const userService = require('../services/user')
 
 
 module.exports = async (props, event, api) => {
-    let res = await apiService.executeQuery(api, "counter", {
-        "user": "@me"
+    console.log("New user joined for the first time.")
+    return userService.create(api, {
+        id: "@me"
     })
-
-    let counters = res.data;
-    if (counters.length == 0) {
-        await apiService.createDoc(api, "counter", {
-            "user": "@me",
-            "count": 0,
-        })
-    }
-
-
-    return {};
 }

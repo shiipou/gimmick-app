@@ -1,11 +1,9 @@
 'use strict'
 
-module.exports = (data, props) => {
-    var userData = data[0];
-    
+module.exports = ([user], props) => {
+    console.log("User data: ", props.user)
     return {
         type: "text",
-        value: JSON.stringify(userData)
+        value: JSON.stringify(props.user)
     }
 }
-

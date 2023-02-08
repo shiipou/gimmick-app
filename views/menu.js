@@ -1,9 +1,9 @@
 'use strict'
 
-module.exports = (data, props) => {
+module.exports = (data, {user}) => {
   return {
-    "type": "container",
-    "decoration": {
+    type: "container",
+    decoration: {
       color: 0xFFFFFFFF,
       boxShadow: {
         blurRadius: 8,
@@ -14,49 +14,78 @@ module.exports = (data, props) => {
         }
       },
     },
-    "padding": {
+    padding: {
       top: 16,
       bottom: 16,
-      left: 32,
-      right: 32,
+      left: 8,
+      right: 8,
     },
-    "child": {
-      "type": "flex",
-      "fillParent": true,
-      "mainAxisAlignment": "spaceBetween",
-      "crossAxisAlignment": "center",
-      "padding": { right: 32 },
-      "children": [
-        {
-          "type": "container",
-          "constraints": {
-            "minWidth": 32,
-            "minHeight": 32,
-            "maxWidth": 32,
-            "maxHeight": 32,
+    child: {
+      type: "flex",
+      fillParent: true,
+      direction: "vertical",
+      spacing: 16,
+      children: [{
+        type: "view",
+        name: "menuItem",
+        props: {
+          "item": {
+            "icon": "home",
           },
-          "child": {
-            "type": "image",
-            "src": "logo.png"
+          "action": "navigation",
+          "isSelected": user.navigation == "home",
+          "props": {
+            "page": "home"
           },
-        },
-        {
-          "type": "flexible",
-          "child": {
-            "type": "container",
-            "child": {
-              "type": "text",
-              "value": "Hello World",
-              "textAlign": "center",
-              "style": {
-                "fontWeight": "bold",
-                "fontSize": 24,
-              },
-            }
-          }
+          "color": 0xFFA4A4A4
         }
-      ]
-    },
+      }, {
+        type: "flexible",
+        child: {
+          type: "flex",
+          fillParent: true,
+          direction: "vertical",
+          children: [...data.map((item) => {
+            return {
+              type: "view",
+              name: "menuItem",
+              coll: "guild",
+              query: {
+                "_id": item.guild
+              },
+              props: {
+                  "isSelected": user.selectedGuild === item.guild,
+                  "isOwner": item.owner == user.id,
+                  "color": item.color
+              }
+            }
+          }), {
+            type: "view",
+            name: "menuItem",
+            props: {
+              user,
+              item: {
+                name: "+",
+              },
+              color: 0xFFA4A4A4
+            }
+          }]
+        }
+      }, {
+          type: "view",
+          name: "menuItem",
+          props: {
+            "item": {
+              "icon": "settings",
+            },
+            "action": "navigation",
+            "isSelected": user.navigation == "settings",
+            "props": {
+              "page": "settings"
+            },
+            "color": 0xFFA4A4A4
+        }
+      }]
+    }
   }
 }
-

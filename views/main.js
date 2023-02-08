@@ -2,21 +2,11 @@
 
 module.exports = (data, props) => {
   return {
-    "type": "flex",
-    "direction": "vertical",
-    "scroll": true,
-    "spacing": 4,
-    "crossAxisAlignment": "center",
-    "children": [
-      {
-        "type": "view",
-        "name": "menu",
-      },
-      {
-        "type": "view",
-        "name": "home"
-      }
-    ]
+    type: "view",
+    name: "navigation",
+    coll: "users",
+    query: {
+      "id": "@me"
+    }
   }
 }
-
