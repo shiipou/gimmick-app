@@ -3,20 +3,23 @@
 module.exports = (data, props) => {
   return {
     type: "view",
-    name: "appGuard",
-    coll: "app",
-    query: { },
+    name: "guards",
     props: {
-      "page": [{
-        "name": "userGuard",
-        "coll": "users",
-        "query": {
+      page: {
+        name: "layout",
+        coll: "users",
+        query: {
           "id": "@me"
         }
+      },
+      guards: [{
+        name: "appGuard",
+        coll: "app",
+        query: { }
       }, {
-        "name": "layout",
-        "coll": "users",
-        "query": {
+        name: "userGuard",
+        coll: "users",
+        query: {
           "id": "@me"
         }
       }]

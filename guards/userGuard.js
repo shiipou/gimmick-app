@@ -1,6 +1,8 @@
 'use strict'
 
-module.exports = ([user], {page}) => {
+const GuardsModule = require('./_guards')
+
+module.exports = ([user], {page, guards}) => {
   if(user.username == null) {
     return {
       type: "view",
@@ -8,18 +10,5 @@ module.exports = ([user], {page}) => {
     }
   }
 
-  let nextPage = page
-  if(page instanceof Array) {
-    nextPage = page.splice(0, 1)[0]
-  }
-
-  return {
-    type: "view",
-    name: nextPage.name,
-    coll: nextPage.coll,
-    query: nextPage.query,
-    props: {
-      "page": page
-    }
-  }
+  return GuardsModule([], {page, guards})
 }

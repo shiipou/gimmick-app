@@ -18,7 +18,7 @@ module.exports = (data, {user}) => {
       top: 16,
       bottom: 16,
       left: 8,
-      right: 8,
+      right: 8
     },
     child: {
       type: "flex",
@@ -27,29 +27,19 @@ module.exports = (data, {user}) => {
       spacing: 16,
       children: [{
         type: "view",
-        name: "menuItem",
-        props: {
-          "item": {
-            "icon": "home",
-          },
-          "action": "navigation",
-          "isSelected": user.navigation == "home",
-          "props": {
-            "page": "home"
-          },
-          "color": 0xFFA4A4A4
-        }
+        name: "homeButton"
       }, {
         type: "flexible",
         child: {
           type: "flex",
           fillParent: true,
+          scroll: true,
+          spacing: 8,
           direction: "vertical",
           children: [...data.map((item) => {
-            console.log("Rendering item", item)
             return {
               type: "view",
-              name: "menuItem",
+              name: "guildItem",
               coll: "guilds",
               query: {
                 "_id": item.guild
@@ -62,29 +52,12 @@ module.exports = (data, {user}) => {
             }
           }), {
             type: "view",
-            name: "menuItem",
-            props: {
-              item: {
-                name: "+",
-              },
-              color: 0xFFA4A4A4
-            }
+            name: "createGuildButton"
           }]
         }
       }, {
           type: "view",
-          name: "menuItem",
-          props: {
-            "item": {
-              "icon": "settings",
-            },
-            "action": "navigation",
-            "isSelected": user.navigation == "settings",
-            "props": {
-              "page": "settings"
-            },
-            "color": 0xFFA4A4A4
-        }
+          name: "settingsButton"
       }]
     }
   }

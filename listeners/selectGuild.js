@@ -5,19 +5,14 @@ const userService = require("../services/user")
 module.exports = async ({guild}, event, api) => {
     var user = await userService.get(api)
 
-    if(!guild){
-        return userService.update(api, {
-            ...user,
-            navigation: "createGuild"
-        })
-    }
-
+    let expand = false
     if(user.selectedGuild == guild){
-        return {}
+        expand = !user.expand
     }
 
     return userService.update(api, {
         ...user,
+        expand: expand,
         navigation: "home",
         selectedGuild: guild
     })

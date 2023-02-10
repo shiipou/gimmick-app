@@ -8,7 +8,7 @@ module.exports = ([user], props) => {
         fillParent: true,
         children: [{
             type: "view",
-            name: "menu",
+            name: "guildMenu",
             coll: "guild_users",
             query: {
                 "user": user.id
@@ -22,7 +22,7 @@ module.exports = ([user], props) => {
                 name: "navigation",
                 coll: "guilds",
                 query: {
-                    "_id": user.selectedGuild
+                    "_id": user.selectedGuild ?? "null"
                 },
                 props: { user }
             }
