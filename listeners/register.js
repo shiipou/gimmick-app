@@ -1,21 +1,19 @@
 'use strict'
 
-const userService = require("../services/user")
+import * as userService from "../services/user.js";
 
-module.exports = async (props, event, api) => {
-    userService.get(api).then(async (user) => {
-        let tag = null;
-        do {
-            tag = Math.floor(Math.random() * 10000).toString().padStart(4, "0");
-        } while(!(await userService.available(api, event.value.username, tag)))
+export default async (props, event, api) => {
+    const user = await userService.get(api)
 
-        await userService.update(api, {
-            ...user,
-            username: event.value.username,
-            tag: tag,
-            navigation: "home"
-        })
+    let tag = null;
+    do {
+        tag = Math.floor(Math.random() * 10000).toString().padStart(4, "0");
+    } while(!(await userService.available(api, event.value.username, tag)))
+
+    return await userService.update(api, {
+        ...user,
+        username: event.value.username,
+        tag: tag,
+        navigation: "home"
     })
-
-    return {}
 }

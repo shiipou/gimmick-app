@@ -1,28 +1,24 @@
 'use strict'
 
-module.exports = (data, props) => {
-  return {
-    type: "view",
-    name: "guards",
-    props: {
-      page: {
-        name: "layout",
-        coll: "users",
-        query: {
-          "id": "@me"
-        }
-      },
-      guards: [{
-        name: "appGuard",
-        coll: "app",
-        query: { }
-      }, {
-        name: "userGuard",
-        coll: "users",
-        query: {
-          "id": "@me"
-        }
-      }]
-    }
-  }
+import { View } from "@lenra/components"
+
+export default (data, props) => {
+  return  View("guards")
+            .props({
+              page: View("layout")
+                      .coll("users")
+                      .query({
+                        "id": "@me"
+                      }),
+              guards: [
+                View("appGuard")
+                  .coll("app")
+                  .query({}),
+                View("userGuard")
+                  .coll("users")
+                  .query({
+                    "id": "@me"
+                  })
+              ]
+            })
 }

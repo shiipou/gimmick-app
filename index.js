@@ -1,36 +1,36 @@
 'use strict'
 // Views
 
-module.exports = async () => {
+export default async () => {
   return {
     views: {
-      main: require('./views/main'),
-      guards: require('./guards/_guards'),
-      appGuard: require('./guards/appGuard'),
-      userGuard: require('./guards/userGuard'),
-      userData: require('./views/userData'),
-      layout: require('./views/layout'),
-      guildMenu: require('./views/menu/guildMenu'),
-      channelMenu: require('./views/menu/channelMenu'),
-      guildItem: require('./views/menu/guildItem'),
-      channelItem: require('./views/menu/channelItem'),
-      channelShortItem: require('./views/menu/channelShortItem'),
-      home: require('./views/userData'),
-      homeButton: require('./views/menu/homeButton'),
-      settingsButton: require('./views/menu/settingsButton'),
-      createGuildButton: require('./views/menu/createGuildButton'),
-      createGuild: require('./views/createGuild'),
-      navigation: require('./views/navigation'),
-      register: require('./views/register')
+      main: import('./views/main.js'),
+      guards: import('./guards/_guards.js'),
+      appGuard: import('./guards/appGuard.js'),
+      userGuard: import('./guards/userGuard.js'),
+      userData: import('./views/userData.js'),
+      layout: import('./views/layout.js'),
+      guildMenu: import('./views/menu/guildMenu.js'),
+      channelMenu: import('./views/menu/channelMenu.js'),
+      guildItem: import('./views/menu/guildItem.js'),
+      channelItem: import('./views/menu/channelItem.js'),
+      channelShortItem: import('./views/menu/channelShortItem.js'),
+      home: import('./views/userData.js'),
+      homeButton: import('./views/menu/homeButton.js'),
+      settingsButton: import('./views/menu/settingsButton.js'),
+      createGuildButton: import('./views/menu/createGuildButton.js'),
+      createGuild: import('./views/createGuild.js'),
+      navigation: import('./views/navigation.js'),
+      register: import('./views/register.js')
     },
     listeners: {
-      register: require('./listeners/register'),
-      createGuild: require('./listeners/createGuild'),
-      selectGuild: require('./listeners/selectGuild'),
-      navigation: require('./listeners/navigation'),
-      onEnvStart: require('./listeners/onEnvStart'),
-      onSessionStart: require('./listeners/onSessionStart'),
-      onUserFirstJoin: require('./listeners/onUserFirstJoin')
+      register: import('./listeners/register.js'),
+      createGuild: import('./listeners/createGuild.js'),
+      selectGuild: import('./listeners/selectGuild.js'),
+      navigation: import('./listeners/navigation.js'),
+      onEnvStart: import('./listeners/onEnvStart.js'),
+      onSessionStart: import('./listeners/onSessionStart.js'),
+      onUserFirstJoin: import('./listeners/onUserFirstJoin.js')
     },
     rootView: 'main'
   }

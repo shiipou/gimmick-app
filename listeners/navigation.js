@@ -1,8 +1,8 @@
 'use strict'
 
-const userService = require("../services/user")
+import * as userService from "../services/user.js"
 
-module.exports = async (props, event, api) => {
+export default async (props, event, api) => {
     var userData = await userService.get(api)
 
     return userService.update(api, {

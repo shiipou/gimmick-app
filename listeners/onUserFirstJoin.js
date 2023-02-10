@@ -1,9 +1,9 @@
 'use strict'
 
-const userService = require('../services/user')
+import * as userService from '../services/user.js'
 
 
-module.exports = async (props, event, api) => {
+export default async (props, event, api) => {
     console.debug("New user joined for the first time.")
     return userService.create(api, {
         id: "@me"

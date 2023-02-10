@@ -4,11 +4,13 @@
 
 "use strict"
 
-const express = require('express');
-const morgan = require('morgan');
+import express, { raw, text, json, urlencoded } from 'express';
+import morgan from 'morgan';
+
+import manifestHandler from './index.js';
+
 const app = express();
 
-const manifestHandler = require('./index.js');
 const defaultMaxSize = '100kb'; // body-parser default
 
 const rawLimit = process.env.MAX_RAW_SIZE || defaultMaxSize;
@@ -45,11 +47,11 @@ app.use(function addDefaultContentType(req, res, next) {
 })
 
 if (process.env.RAW_BODY === 'true') {
-    app.use(express.raw({ type: '*/*', limit: rawLimit }))
+    app.use(raw({ type: '*/*', limit: rawLimit }))
 } else {
-    app.use(express.text({ type: "text/*" }));
-    app.use(express.json({ limit: jsonLimit }));
-    app.use(express.urlencoded({ extended: true }));
+    app.use(text({ type: "text/*" }));
+    app.use(json({ limit: jsonLimit }));
+    app.use(urlencoded({ extended: true }));
 }
 
 const get_req_type = (req) => {
@@ -115,15 +117,13 @@ async function initManifest() {
 }
 
 async function handleAppManifest(req, res) {
-
-
     return initManifest().then(manifest => {
 
         res.status(200).json({ manifest: manifest });
     })
         .catch(err => {
             const err_string = err.toString ? err.toString() : err;
-            console.error("handleAppManifest:", err_string);
+            console.error("Manifest", err);
             res.status(500).send(err_string);
         });
 }
@@ -132,23 +132,20 @@ async function handleAppView(req, res) {
     let { view, data, props } = req.body;
 
     if (Object.keys(viewHandlers).includes(view)) {
-        let possibleFutureRes = viewHandlers[view](data, props)
-
-        return Promise.resolve(possibleFutureRes)
-            .then(view => {
-                res.status(200).json(view);
-            })
-            .catch(err => {
-                const err_string = err.toString ? err.toString() : err;
-                console.error('handleAppView:', err_string);
-                res.status(500).send(err_string);
-            });
+        const handler = await viewHandlers[view];
+        try {
+            const view = handler.default(data, props)
+            res.status(200).json(view);
+        } catch(err) {
+            const err_string = err.toString ? err.toString() : err;
+            console.error(`View`, view, err);
+            res.status(500).send(err_string);
+        }
     } else {
         let msg = `No view found for name ${view} in app manifest.`;
         console.error(msg);
         res.status(404).send(msg);
     }
-
 }
 
 /**
@@ -165,20 +162,18 @@ async function handleAppListener(req, res) {
         listeners file need to exactly math with action name
     */
     if (Object.keys(listenerHandlers).includes(action)) {
-        let possibleFutureRes = listenerHandlers[action](props, event, api);
-
-        return Promise.resolve(possibleFutureRes)
-            .then(() => {
-                res.status(200).send();
-            })
-            .catch(err => {
-                const err_string = err.toString ? err.toString() : err;
-                console.error('handleAppAction:', err_string);
-                res.status(500).send(err_string);
-            });
+        const handler = await listenerHandlers[action];
+        try{
+            handler.default(props, event, api);
+            return res.status(200).send();
+        }catch(err){
+            const err_string = err.toString ? err.toString() : err;
+            console.error('Listener', action, err);
+            res.status(500).send(err_string);
+        }
     } else {
         console.error(`No listener found for action ${action} in app manifest.`);
-        res.status(404).send(`No listener found for action ${action} in app manifest.`);
+        return res.status(404).send(`No listener found for action ${action} in app manifest.`);
     }
 }
 

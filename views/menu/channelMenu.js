@@ -1,16 +1,35 @@
 'use strict'
 
-module.exports = (data, {user, guild}) => {
-  if(!guild) {
-    return {
-      type: "text",
-      value: ""
-    }
+import { Text, Container, Flex, View, Flexible } from "@lenra/components"
+
+export default (data, { user, guild }) => {
+  if (!guild) {
+    return Text() // Empty text to show nothing in this area (because container must have a child)
   }
 
-  return {
-    type: "container",
-    decoration: {
+  return Container(
+    Flex(
+      View("guildItem")
+        .coll("guilds")
+        .query({
+          "_id": guild._id
+        }).props({}),
+      Flexible(
+        Flex(data.map((item) => {
+          return View(user.expand ? "channelItem" : "channelShortItem")
+            .props({
+              "isSelected": user.selectedGuild == item.guild,
+              "isOwner": item.owner == user.id,
+              "color": item.color
+            })
+        })
+        )
+      )
+    ).direction("vertical")
+      .fillParent(true)
+      .spacing(16)
+  ).padding(16, 8)
+    .decoration({
       color: 0xFFFFFFFF,
       boxShadow: {
         blurRadius: 8,
@@ -19,48 +38,6 @@ module.exports = (data, {user, guild}) => {
           dx: 0,
           dy: 1
         }
-      },
-    },
-    padding: {
-      top: 16,
-      bottom: 16,
-      left: 8,
-      right: 8
-    },
-    child: {
-      type: "flex",
-      fillParent: true,
-      direction: "vertical",
-      spacing: 16,
-      children: [{
-        type: "view",
-        name: "guildItem",
-        coll: "guilds",
-        query: {
-          "_id": guild._id
-        },
-        props: {}
-      }, {
-        type: "flexible",
-        child: {
-          type: "flex",
-          fillParent: true,
-          scroll: true,
-          spacing: 8,
-          direction: "vertical",
-          children: [...data.map((item) => {
-            return {
-              type: "view",
-              name: user.expand ? "channelItem" : "channelShortItem",
-              props: {
-                  "isSelected": user.selectedGuild == item.guild,
-                  "isOwner": item.owner == user.id,
-                  "color": item.color
-              }
-            }
-          })]
-        }
-      }]
-    }
-  }
+      }
+    })
 }

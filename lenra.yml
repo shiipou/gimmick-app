@@ -26,4 +26,3 @@ generator:
       - "!/views/"
       - "!/guards/"
       - "!/migrations/"
-

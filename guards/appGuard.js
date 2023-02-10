@@ -1,16 +1,14 @@
 'use strict'
 
-const GuardsModule = require('./_guards')
+import { Container, Text } from "@lenra/components"
 
-module.exports = ([app], {page, guards}) => {
-  if (!app || app.maintenance) {
-    return {
-      type: "container",
-      child: {
-        type: "text",
-        value: "Gimmick is currently under maintenance. Please try again later."
-      }
-    }
+import GuardsModule from './_guards.js'
+
+export default ([app], {page, guards}) => {
+  if (!app || app?.maintenance) {
+    return Container(
+      Text("Gimmick is currently under maintenance. Please try again later.")
+    )
   }
   
   return GuardsModule([], {page, guards})
