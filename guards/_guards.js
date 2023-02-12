@@ -1,6 +1,8 @@
 'use strict'
 
-module.exports = (data, {page, guards = []}) => {
+import { View } from "@lenra/components"
+
+export default (data, {page, guards = []}) => {
   let nextView = page
   let otherGuards
   
@@ -8,14 +10,11 @@ module.exports = (data, {page, guards = []}) => {
     [nextView, ...otherGuards] = guards
   }
 
-  return {
-    type: "view",
-    name: nextView.name,
-    coll: nextView.coll,
-    query: nextView.query,
-    props: {
-      "page": page,
-      "guards": otherGuards
-    }
-  }
+  return  View(nextView.name)
+            .coll(nextView.coll)
+            .query(nextView.query)
+            .props({
+              "page": page,
+              "guards": otherGuards
+            })
 }

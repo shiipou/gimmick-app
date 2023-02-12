@@ -1,9 +1,10 @@
 'use strict'
 
-const guildService = require("../services/guild")
-const userService = require("../services/user")
+import * as guildService from "../services/guild.js"
+import * as userService from "../services/user.js"
 
-module.exports = async ({user}, event, api) => {
+export default async ({user}, event, api) => {
+    console.log("createGuild", event.value.name)
     const guild = await guildService.create(api, {
         "name": event.value.name
     })

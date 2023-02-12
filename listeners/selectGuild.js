@@ -1,8 +1,8 @@
 'use strict'
 
-const userService = require("../services/user")
+import * as userService from "../services/user.js"
 
-module.exports = async ({guild}, event, api) => {
+export default async ({guild}, event, api) => {
     var user = await userService.get(api)
 
     let expand = false

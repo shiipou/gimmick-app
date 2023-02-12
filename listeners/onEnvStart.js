@@ -1,12 +1,12 @@
 'use strict'
 
-const migrationsService = require("../services/migrations")
-const appService = require("../services/app")
+import * as migrationsService from "../services/migrations.js"
+import * as appService from "../services/app.js"
 
 
-module.exports = async (props, event, api) => {
+export default async (props, event, api) => {
     console.info("App is starting!")
 
-    appService.get(api).then(migrationsService.migrate(api))
-    return {}
+    const app = await appService.get(api)
+    return migrationsService.migrate(api, app);
 }

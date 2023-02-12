@@ -1,8 +1,9 @@
 'use strict'
 
-module.exports = (data, props) => {
-    return {
-        type: "text",
-        value: JSON.stringify(props.user)
-    }
+import { Text } from "@lenra/components"
+
+export default (data, props) => {
+    return Text(
+        JSON.stringify(props.user)
+    )
 }

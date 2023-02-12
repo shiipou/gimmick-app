@@ -1,13 +1,12 @@
 'use strict'
 
-const GuardsModule = require('./_guards')
+import { View } from '@lenra/components'
 
-module.exports = ([user], {page, guards}) => {
-  if(user.username == null) {
-    return {
-      type: "view",
-      name: "register"
-    }
+import GuardsModule from './_guards.js'
+
+export default ([user], {page, guards}) => {
+  if(user?.username == null) {
+    return View("register")
   }
 
   return GuardsModule([], {page, guards})
