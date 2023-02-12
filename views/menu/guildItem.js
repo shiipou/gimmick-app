@@ -13,7 +13,7 @@ export default ([guild], props) => {
         height: 1.7,
         fontWeight: props?.isSelected ? "bold" : "normal",
         fontStyle: props?.isSelected ? "normal" : "italic"
-      })
+      }).textAlign("center")
     ).constraints({
       minWidth: 48,
       minHeight: 48,
@@ -40,10 +40,7 @@ export default ([guild], props) => {
         }
       }
     })
-  ).onPressed({
-    action: "selectGuild",
-    props: {
-      "guild": guild._id
-    }
+  ).onPressed("selectGuild", {
+    "guild": guild._id
   })
 }

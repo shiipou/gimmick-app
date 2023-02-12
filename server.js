@@ -104,7 +104,7 @@ function handleAppResource(req, res) {
 
 async function initManifest() {
     if (manifest == null) {
-        let tempManifest = await manifestHandler();
+        const tempManifest = await manifestHandler();
         viewHandlers = tempManifest.views;
         listenerHandlers = tempManifest.listeners || {};
         viewHandlers = tempManifest.views;

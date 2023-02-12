@@ -2,7 +2,7 @@
 
 import { Actionable, Container, Text } from "@lenra/components"
 
-export default ([item], { user, action = "selectGuild", color, isSelected, isOwner, props }) => {
+export default ([item], props) => {
 
   return Actionable(
     Container(
@@ -37,10 +37,7 @@ export default ([item], { user, action = "selectGuild", color, isSelected, isOwn
         y: 10
       }
     })
-  ).onPressed({
-    action: "selectGuild",
-    props: {
-      "guild": item._id
-    }
+  ).onPressed("selectGuild",{
+    "guild": item._id
   })
 }

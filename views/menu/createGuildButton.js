@@ -34,5 +34,7 @@ export default (_data, _props) => {
         y: 20
       }
     }).color(0xFFA4A4A4)
-  )
+  ).onPressed("navigation", {
+    page: "createGuild"
+  })
 }

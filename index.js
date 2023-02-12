@@ -12,6 +12,7 @@ export default async () => {
       layout: import('./views/layout.js'),
       guildMenu: import('./views/menu/guildMenu.js'),
       channelMenu: import('./views/menu/channelMenu.js'),
+      channelList: import('./views/menu/channelList.js'),
       guildItem: import('./views/menu/guildItem.js'),
       channelItem: import('./views/menu/channelItem.js'),
       channelShortItem: import('./views/menu/channelShortItem.js'),

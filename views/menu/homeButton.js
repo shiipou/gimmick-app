@@ -32,9 +32,6 @@ export default (data, props) => {
           y: 20
         }
       }
-    }).onPressed({
-      action: "selectGuild",
-      props: {}
     })
-  )
+  ).onPressed("selectGuild", {})
 }

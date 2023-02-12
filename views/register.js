@@ -3,8 +3,8 @@
 import { Flex, Text, Container, Form, TextField, Button } from "@lenra/components"
 
 export default (data, props) => {
-  return Flex([
-    Flex([
+  return Flex(
+    Flex(
       Text("Welcome to Gimmick.").style({
         fontSize: 24,
         fontWeight: "bold"
@@ -13,26 +13,26 @@ export default (data, props) => {
       Text("This will only take a few seconds."),
       Container(
         Form(
-          Flex([
-            TextField()
+          Flex(
+            TextField("")
               .name("username")
               .style({
-                label: Text("Please enter your username.")
+                decoration: {
+                   label: Text("Please enter your username.")
+                }
               }),
             Button("Validate")
               .submit(true)
-          ]).direction("vertical")
+          ).direction("vertical")
             .fillParent(true)
             .crossAxisAlignment("center")
-        ).onSubmit({
-          action: "register"
-        })
+        ).onSubmit("register")
       ).maxWidth(250)
-    ]).direction("vertical")
+    ).direction("vertical")
       .mainAxisAlignment("center")
       .crossAxisAlignment("center")
       .fillParent(true)
-  ]).direction("horizontal")
+  ).direction("horizontal")
     .mainAxisAlignment("center")
     .crossAxisAlignment("center")
     .fillParent(true)

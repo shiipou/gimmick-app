@@ -32,11 +32,8 @@ export default (data, props) => {
           y: 20
         }
       }
-    }).onPressed({
-      action: "navigation",
-      props: {
-        page: "home"
-      }
     })
-  )
+  ).onPressed("navigation", {
+    page: "home"
+  })
 }

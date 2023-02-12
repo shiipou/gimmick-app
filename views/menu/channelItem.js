@@ -9,10 +9,10 @@ export default ([item], props) => {
       Text(
         item.name
       ).textAlign("center")
-      .style({
-        fontSize: 18,
-        fontWeight: "bold"
-      })
+        .style({
+          fontSize: 18,
+          fontWeight: "bold"
+        })
     ).borderRadius({
       topLeft: {
         x: 20,
@@ -27,14 +27,11 @@ export default ([item], props) => {
         y: 20
       },
       bottomLeft: {
-        x: 20, 
+        x: 20,
         y: 20
       }
     })
-  ).onPressed({
-    action: "selectGuild",
-    props: {
-      "guild": item._id
-    }
+  ).onPressed("selectGuild", {
+    "guild": item._id
   })
 }

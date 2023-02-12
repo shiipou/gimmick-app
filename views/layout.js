@@ -3,7 +3,7 @@
 import { Flex, View, Flexible } from "@lenra/components"
 
 export default ([user], props) => {
-  return Flex([
+  return Flex(
     View("guildMenu")
       .coll("guild_users")
       .query({
@@ -16,7 +16,7 @@ export default ([user], props) => {
           "_id": user.selectedGuild ?? "null"
         }).props({ user })
     )
-  ]).direction("horizontal")
+  ).direction("horizontal")
     .crossAxisAlignment("center")
     .fillParent(true)
 }

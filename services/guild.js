@@ -3,10 +3,10 @@
 import * as apiService from './api.js';
 
 const colors = [
-    0xFF70CBF2,
-    0xFFF27A86,
-    0xFFF6C28B,
-    0xFFA4A4A4
+    0xFF70cbf2,
+    0xFFf27a86,
+    0xFFf6c28b,
+    0xFF57c0b3
 ]
 
 export async function get(api, id) {
