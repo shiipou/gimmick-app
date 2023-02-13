@@ -2,7 +2,7 @@
 
 import { Container, Text } from "@lenra/components"
 
-import GuardsModule from './_guards.js'
+import { default as GuardsModule} from './_guards.js'
 
 export default ([app], {page, guards}) => {
   if (!app || app?.maintenance) {
@@ -10,6 +10,6 @@ export default ([app], {page, guards}) => {
       Text("Gimmick is currently under maintenance. Please try again later.")
     )
   }
-  
+
   return GuardsModule([], {page, guards})
 }

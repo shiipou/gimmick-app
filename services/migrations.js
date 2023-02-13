@@ -8,7 +8,7 @@ import * as url from 'url';
 import * as apiService from './api.js'
 import * as appService from "./app.js"
 
-import * as pjson from '../package.json' assert { type: 'json' }
+import { default as pjson } from '../package.json' assert { type: 'json' }
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -2,7 +2,7 @@
 
 import { View } from '@lenra/components'
 
-import GuardsModule from './_guards.js'
+import { default as GuardsModule } from './_guards.js'
 
 export default ([user], {page, guards}) => {
   if(user?.username == null) {
