@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Counter } from "./Counter";
 import { Data } from "./Data";
 
 export type requestApi = {

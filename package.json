@@ -1,5 +1,5 @@
 {
-  "name": "typescript-template",
+  "name": "gimmick",
   "version": "1.0.0",
   "description": "Lenra's TypeScript template",
   "main": "dist/server.js",
@@ -8,6 +8,7 @@
     "index": "npm run genBuild && node tmp/build.js",
     "build": "tsc",
     "start": "node dist/server.js",
+    "debug": "touch /tmp/.lock && node --inspect dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],

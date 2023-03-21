@@ -51,3 +51,10 @@ generator:
       - "!/*.json"
       - "!/src/"
       - "!/resources/"
+      - "!/migrations/"
+dev:
+  dofigen:
+    cmd:
+    - "npm run debug"
+    ports:
+    - 9229

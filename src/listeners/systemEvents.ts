@@ -1,27 +1,20 @@
-import { Api } from '../classes/Api';
-import { Counter } from '../classes/Counter';
-import { event, props } from '../classes/types';
+import { Api } from '../classes/Api'
+import { event, props } from '../classes/types'
+import App from '../classes/App'
+import User from '../classes/User'
 
 export async function onEnvStart(_props: props, _event: event, api: Api) {
-    console.log("onEnvStart");
-    let counters = await api.executeQuery(Counter, {
-        "user": "global"
-    })
+    console.info("App is starting!")
 
-    if (counters.length == 0) {
-        await api.createDoc(new Counter(0, "global"));
-    }
+    await App.migrate(api)
+
+    return {}
 }
 
 export async function onUserFirstJoin(_props: props, _event: event, api: Api) {
-    console.log("onUserFirstJoin");
-    let counters = await api.executeQuery(Counter, {
-        "user": "@me"
-    })
-
-    if (counters.length == 0) {
-        await api.createDoc(new Counter(0, "@me"));
-    }
+    console.info("User is joining for the first time!")
+    
+    return api.createDoc(new User())
 }
 
 export async function onSessionStart(_props: props, _event: event, api: Api) {

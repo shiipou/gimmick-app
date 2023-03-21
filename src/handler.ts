@@ -1,6 +1,6 @@
 import * as manifest from './manifest';
 import { getListener, getView } from './index.gen';
-import path = require('path');
+import * as path from 'path';
 import { existsSync } from 'fs';
 import { Api, requestApi } from './classes/Api';
 import { data, props } from './classes/types';
