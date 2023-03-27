@@ -5,6 +5,7 @@
     "declaration": true,
     "outDir": "./dist",
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
     "types": ["node"],
     "plugins": [

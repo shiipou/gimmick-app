@@ -3,12 +3,12 @@ import * as path from "path"
 
 import { Api } from "./_Api"
 import { Data } from "./_Data"
-// import { name as appName, version as appVersion } from '../../package.json' assert { type: 'json' }
+import { name as appName, version as appVersion } from '../../package.json'
 
 import Migration, { MigrationFile } from "./Migration"
 
-const appName: string = "Gimmick"
-const appVersion: string = "0.0.1"
+// const appName: string = "Gimmick"
+// const appVersion: string = "0.0.1"
 
 export default class App extends Data {
     name: string
