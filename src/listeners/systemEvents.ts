@@ -1,5 +1,5 @@
-import { Api } from '../classes/Api'
-import { event, props } from '../classes/types'
+import { Api } from '../classes/_Api'
+import { event, props } from '../classes/_types'
 import App from '../classes/App'
 import User from '../classes/User'
 

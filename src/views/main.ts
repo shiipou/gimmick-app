@@ -1,5 +1,5 @@
 import { Component, Flex, IComponent, View } from "@lenra/components"
-import { data, props } from "../classes/types"
+import { data, props } from "../classes/_types"
 import { views } from "../index.gen"
 import GuardsModule from "../guards/_guards"
 

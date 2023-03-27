@@ -1,6 +1,6 @@
 import { Component, Flex, Flexible, IComponent, View } from "@lenra/components"
-import { Api } from "../classes/Api"
-import { data, props } from "../classes/types"
+import { Api } from "../classes/_Api"
+import { data, props } from "../classes/_types"
 import { views } from "../index.gen"
 
 export default function ([user]: data, _props: props): Component<IComponent> | IComponent {

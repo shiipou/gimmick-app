@@ -1,7 +1,7 @@
 'use strict'
 
 import { Flex, Text, Container, Form, TextField, Button } from "@lenra/components"
-import { data, props } from "../../classes/types"
+import { data, props } from "../../classes/_types"
 
 export default (_data: data, { user }: props) => {
     return Flex([

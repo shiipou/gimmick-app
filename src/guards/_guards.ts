@@ -1,7 +1,7 @@
 'use strict'
 
 import { Component, IComponent, View, ViewImpl } from "@lenra/components"
-import { data } from "../classes/types"
+import { data } from "../classes/_types"
 
 export default (_data: data, { page, guards = [] }) => {
   let nextView = page

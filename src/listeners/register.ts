@@ -1,5 +1,5 @@
-import { props, event } from "../classes/types";
-import { Api } from "../classes/Api";
+import { props, event } from "../classes/_types";
+import { Api } from "../classes/_Api";
 import User from "../classes/User"
 
 export default async (_props: props, event: event, api: Api) => {

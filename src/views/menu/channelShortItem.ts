@@ -1,7 +1,7 @@
 'use strict'
 
 import { Actionable, Container, Text } from "@lenra/components"
-import { data, props } from "../../classes/types"
+import { data, props } from "../../classes/_types"
 
 export default ([item]: data, {color}: props) => {
   return Actionable(

@@ -1,7 +1,7 @@
 'use strict'
 
 import { Text, Container, Flex, View, Flexible } from "@lenra/components"
-import { data, props } from "../../classes/types"
+import { data, props } from "../../classes/_types"
 
 export default ([item]: data, { user, guild }: props) => {
   if (!guild) {

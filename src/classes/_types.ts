@@ -1,5 +1,5 @@
 import { Component, IComponent } from "@lenra/components";
-import { Api } from "./Api";
+import { Api } from "./_Api";
 
 export type View = (data: any[] | undefined, props: props) => Component<IComponent> | IComponent;
 

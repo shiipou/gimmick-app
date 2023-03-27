@@ -1,10 +1,8 @@
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as url from 'url';
 
-
-import { Api } from "./Api"
-import { Data } from "./Data"
+import { Api } from "./_Api"
+import { Data } from "./_Data"
 // import { name as appName, version as appVersion } from '../../package.json' assert { type: 'json' }
 
 import Migration, { MigrationFile } from "./Migration"
@@ -38,7 +36,7 @@ export default class App extends Data {
     
     async migrate(api: Api, migrationDir: string = path.join(__dirname, "../../migrations")) {
         console.info("Checking App migrations...")
-        const appliedMigrations = await api.executeQuery(Migration, {}) 
+        const appliedMigrations = await api.executeQuery(Migration, {})
         
         // get all migrations
         const migrationPaths:string[] = await fs.readdir(migrationDir)

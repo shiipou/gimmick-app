@@ -2,8 +2,8 @@ import * as manifest from './manifest';
 import { getListener, getView } from './index.gen';
 import * as path from 'path';
 import { existsSync } from 'fs';
-import { Api, requestApi } from './classes/Api';
-import { data, props } from './classes/types';
+import { Api, requestApi } from './classes/_Api';
+import { data, props } from './classes/_types';
 
 const RESOURCE_TYPE = "resource";
 const LISTENER_TYPE = "action";

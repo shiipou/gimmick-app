@@ -1,5 +1,5 @@
-import { Api } from "./Api"
-import { Data } from "./Data"
+import { Api } from "./_Api"
+import { Data } from "./_Data"
 
 export default class Migration extends Data {
     name: string

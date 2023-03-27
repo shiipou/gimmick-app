@@ -1,5 +1,5 @@
 import { Container, Flex, colors, padding, Image, Flexible, Text, Component, IComponent } from '@lenra/components'
-import { data, props } from '../classes/types'
+import { data, props } from '../classes/_types'
 
 export default function (_data: data, _props: props): Component<IComponent> | IComponent {
   return Container(

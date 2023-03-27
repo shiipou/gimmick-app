@@ -1,5 +1,5 @@
-import { Data } from "./Data"
-import { Api } from "./Api"
+import { Data } from "./_Data"
+import { Api } from "./_Api"
 
 const colors: number[] = [
     0xFF70cbf2,

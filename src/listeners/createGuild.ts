@@ -1,7 +1,7 @@
-import { Api } from '../classes/Api';
+import { Api } from '../classes/_Api';
 import Guild, { GuildUsers } from '../classes/Guild';
 import User from '../classes/User';
-import { event, props } from '../classes/types';
+import { event, props } from '../classes/_types';
 
 export default async function (user: User, event: event, api: Api) {
     console.log("createGuild", event.value.name)

@@ -1,7 +1,7 @@
 'use strict'
 
 import { Container, Flex, Flexible, View } from "@lenra/components"
-import { data, props } from "../../classes/types"
+import { data, props } from "../../classes/_types"
 
 export default (data: data, { user }: props) => {
   return Container(

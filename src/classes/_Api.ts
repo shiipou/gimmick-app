@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Data } from "./Data";
+import { Data } from "./_Data";
 
 export type requestApi = {
     url: string,
