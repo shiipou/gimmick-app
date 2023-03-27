@@ -24,6 +24,8 @@ generator:
           - /tmp/cache
     from: *image
     workdir: /app
+    adds:
+      - migrations/
     artifacts:
       - builder: module-loader
         source: "/tmp/module/"

@@ -27,21 +27,18 @@ export default class App extends Data {
     }
 
     static async migrate(api: Api) {
-        const apps:App[] = await api.executeQuery(App, {})
-        let app: App;
-        if (apps.length > 0) {
-            app = apps[0]
-        }else {
+        let app:App | undefined = await api.executeQuery(App, {}).then((apps:App[])=>apps[0])
+        if (!app) {
             console.info("App is not registered, registering...")
-            app = await api.createDoc(new App(appName, appVersion, new Date()))
-            console.debug("App registered:", app)
+            app = (await api.createDoc(new App(appName, appVersion, new Date()))) as App
+            console.debug("App registered:", app, typeof app)
         }
-        return await app.migrate(api)
+        return await app.migrate(api!)
     }
     
     async migrate(api: Api, migrationDir: string = path.join(__dirname, "../../migrations")) {
         console.info("Checking App migrations...")
-        const appliedMigrations = await api.executeQuery(Migration, {})
+        const appliedMigrations = await api.executeQuery(Migration, {}) 
         
         // get all migrations
         const migrationPaths:string[] = await fs.readdir(migrationDir)

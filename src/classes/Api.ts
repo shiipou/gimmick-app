@@ -21,13 +21,15 @@ export class Api {
     }
 
     createDoc<T extends Data>(doc: T): Promise<T> {
+        const c: Class<T> = <Class<T>>doc.constructor;
         return axios.post(`${this.url}/app/colls/${Api.dataCollection(doc)}/docs`, doc, this.options())
-            .then(resp => <T>resp.data);
+            .then(resp => fromJson(c, resp.data));
     }
 
     updateDoc<T extends Data>(doc: T): Promise<T> {
+        const c: Class<T> = <Class<T>>doc.constructor;
         return axios.put(`${this.url}/app/colls/${Api.dataCollection(doc)}/docs/${doc._id}`, doc, this.options())
-            .then(resp => <T>resp.data);
+            .then(resp => fromJson(c, resp.data));
     }
 
     deleteDoc<T extends Data>(doc: T): Promise<void> {

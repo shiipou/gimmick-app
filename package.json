@@ -8,7 +8,7 @@
     "index": "npm run genBuild && node tmp/build.js",
     "build": "tsc",
     "start": "node dist/server.js",
-    "debug": "touch /tmp/.lock && node --inspect dist/server.js",
+    "debug": "touch /tmp/.lock && node --inspect-brk=0.0.0.0:9229 dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
