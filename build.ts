@@ -1,4 +1,5 @@
 import * as fs from 'fs/promises';
+import * as path from 'path';
 
 const SOURCE_DIR = "src";
 const LISTENERS_DIR = "listeners";
@@ -41,29 +42,51 @@ async function indexListeners() {
     );
 }
 
+// Recursively find all `.ts` files in a directory
+async function treeDir(directory: string): Promise<string[] | string> {
+    const files = await fs.readdir(directory);
+
+    const promises = files.map(async (file) => {
+        const fullPath = path.join(directory, file);
+        const stat = await fs.lstat(fullPath);
+        if (stat.isDirectory()) {
+            return treeDir(fullPath);
+        } else if (file.endsWith(".ts")) {
+            return fullPath;
+        } else {
+            return [];
+        }
+    });
+
+    const nestedEntries = await Promise.all(promises);
+    const flattenedEntries = nestedEntries.flat();
+
+    return flattenedEntries;
+}
+
 async function indexViews() {
     // Get all the files in the src/views dir
-    const viewFiles = await fs.readdir(VIEWS_PATH);
+    const viewFiles = await treeDir(VIEWS_PATH);
     // Import each one
-    const promises = viewFiles
-        .map(file => file.replace(/\.ts$/, ""))
-        .map(async file => {
-            const mod = await import(`./${VIEWS_PATH}/${file}`);
+    const promises = (viewFiles as string[]).filter(x=>!path.basename(x).startsWith('_')).map(async file => {
+            const modulePath = `./${file.replace(/\.ts$/, "")}`
+            const mod = await import(modulePath)
             const entries = Object.entries(mod)
                 .filter(([key, value]) => value instanceof Function)
                 .map(([key, value]) => {
                     const view = {
-                        module: `./${VIEWS_DIR}/${file}`,
+                        module: modulePath.replace('src/', ''),
                         key
                     }
+                    const name =  path.basename(file, '.ts')
                     if (key == "default") return {
                         // add it with the name of the file
-                        key: file,
+                        key: name,
                         value: view
                     }
                     // add all the exported functions with the name of the file concatenated with the name of the function
                     return {
-                        key: `${file}:${key}`,
+                        key: `${name}:${key}`,
                         value: view
                     };
                 });
@@ -78,7 +101,7 @@ async function indexViews() {
 
 async function writeIndexFile([listeners, views]) {
     return fs.writeFile("src/index.gen.ts",
-        `import { View, Listener } from "./classes/types";
+        `import { View, Listener } from "./classes/_types";
 
 const listenersCache = ${JSON.stringify(listeners)};
 export async function getListener(name): Promise<Listener> {

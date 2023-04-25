@@ -2,7 +2,6 @@ import { Flex, Text, Container, Form, TextField, Button, Component, IComponent }
 
 import { Api } from "../classes/_Api"
 import { data, props } from "../classes/_types"
-import { views } from "../index.gen"
 
 export default function (_data: data, _props: props): Component<IComponent> | IComponent {
     return Flex([

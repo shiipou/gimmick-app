@@ -16,7 +16,28 @@ export default class Migration extends Data {
         this.version = version
         this.appliedDate = appliedDate
     }
-        
+
+    gt(migration: Migration) : boolean {
+        let this_date: Date
+        if (!(this.date instanceof Date))
+            this_date = new Date(this.date)
+        let other_date: Date
+        if (!(other_date instanceof Date))
+            other_date = new Date(other_date)
+        return this_date > other_date
+    }
+    lt(migration: Migration) : boolean {
+        let this_date: Date
+        if (!(this.date instanceof Date))
+            this_date = new Date(this.date)
+        let other_date: Date
+        if (!(other_date instanceof Date))
+            other_date = new Date(other_date)
+        return this_date < other_date
+    }
+    eq(migration: Migration) : boolean {
+        return this.path == migration.path
+    }
 }
 
 export interface MigrationFile {

@@ -11,7 +11,7 @@
         }, {
             "label": "lenra-build",
             "type": "shell",
-            "command": "lenra build"
+            "command": "lenra build --expose"
         }
     ]
 }

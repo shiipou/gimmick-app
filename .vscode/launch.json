@@ -16,6 +16,18 @@
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app",
             "preLaunchTask": "lenra-start"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Lenra attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "address": "localhost",
+            "port": 9229,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app",
         }
     ]
 }

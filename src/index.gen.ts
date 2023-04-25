@@ -12,7 +12,7 @@ export async function getListener(name): Promise<Listener> {
 }
 export const listeners = { createGuild: "createGuild", navigation: "navigation", register: "register", selectGuild: "selectGuild", onEnvStart: "onEnvStart", onUserFirstJoin: "onUserFirstJoin", onSessionStart: "onSessionStart", onSessionStop: "onSessionStop", onUserLeave: "onUserLeave", onEnvStop: "onEnvStop" };
 
-const viewsCache = {"layout":{"module":"./views/layout","key":"default"},"main":{"module":"./views/main","key":"default"},"menu":{"module":"./views/menu","key":"default"},"navigation":{"module":"./views/navigation","key":"default"},"register":{"module":"./views/register","key":"default"},"userData":{"module":"./views/userData","key":"default"}};
+const viewsCache = {"appGuard":{"module":"./views/guards/appGuard","key":"default"},"userGuard":{"module":"./views/guards/userGuard","key":"default"},"layout":{"module":"./views/layout","key":"default"},"main":{"module":"./views/main","key":"default"},"channelItem":{"module":"./views/menu/channelItem","key":"default"},"channelList":{"module":"./views/menu/channelList","key":"default"},"channelMenu":{"module":"./views/menu/channelMenu","key":"default"},"channelShortItem":{"module":"./views/menu/channelShortItem","key":"default"},"createGuild":{"module":"./views/menu/createGuild","key":"default"},"createGuildButton":{"module":"./views/menu/createGuildButton","key":"default"},"guildItem":{"module":"./views/menu/guildItem","key":"default"},"guildMenu":{"module":"./views/menu/guildMenu","key":"default"},"homeButton":{"module":"./views/menu/homeButton","key":"default"},"settingsButton":{"module":"./views/menu/settingsButton","key":"default"},"menu":{"module":"./views/menu","key":"default"},"navigation":{"module":"./views/navigation","key":"default"},"register":{"module":"./views/register","key":"default"},"userData":{"module":"./views/userData","key":"default"}};
 export async function getView(name): Promise<View> {
     let view = viewsCache[name];
     if (!view) throw new Error(`No view defined for the name '${name}'`);
@@ -22,4 +22,4 @@ export async function getView(name): Promise<View> {
     }
     return view;
 }
-export const views = { layout: "layout", main: "main", menu: "menu", navigation: "navigation", register: "register", userData: "userData" };
+export const views = { appGuard: "appGuard", userGuard: "userGuard", layout: "layout", main: "main", channelItem: "channelItem", channelList: "channelList", channelMenu: "channelMenu", channelShortItem: "channelShortItem", createGuild: "createGuild", createGuildButton: "createGuildButton", guildItem: "guildItem", guildMenu: "guildMenu", homeButton: "homeButton", settingsButton: "settingsButton", menu: "menu", navigation: "navigation", register: "register", userData: "userData" };

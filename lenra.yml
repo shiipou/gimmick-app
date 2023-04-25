@@ -24,8 +24,6 @@ generator:
           - /tmp/cache
     from: *image
     workdir: /app
-    adds:
-      - migrations/
     artifacts:
       - builder: module-loader
         source: "/tmp/module/"
@@ -33,6 +31,9 @@ generator:
       - builder: builder
         source: "/tmp/app/dist/"
         destination: "/app/dist/"
+      - builder: builder
+        source: "/tmp/app/migrations/"
+        destination: "/app/migrations/"
       - builder: builder
         source: "/tmp/app/resources/"
         destination: "/app/resources/"
@@ -53,7 +54,7 @@ generator:
       - "!/*.json"
       - "!/src/"
       - "!/resources/"
-      - "!/migrations/"
+      - "!/migrations/*"
 dev:
   dofigen:
     cmd:

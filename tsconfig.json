@@ -15,7 +15,8 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "migrations/*"
   ],
   "exclude": [
     "src/**/*.test.ts",
