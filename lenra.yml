@@ -33,7 +33,7 @@ generator:
         destination: "/app/dist/"
       - builder: builder
         source: "/tmp/app/migrations/"
-        destination: "/app/migrations/"
+        destination: "/app/dist/migrations/"
       - builder: builder
         source: "/tmp/app/resources/"
         destination: "/app/resources/"

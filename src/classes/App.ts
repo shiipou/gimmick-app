@@ -15,6 +15,7 @@ export default class App extends Data {
     version: string
     date: Date
     maintenance: boolean
+    rollback_webhook?: string
 
     constructor(name: string, version: string, date: Date) {
         super()
@@ -25,12 +26,21 @@ export default class App extends Data {
     }
 
     static async migrate(api: Api) : Promise<void> {
+        
         let app:App | undefined = await api.executeQuery(App, {}).then((apps:App[])=>apps[0])
         if (!app) {
             console.info("App is not registered, registering...")
             app = (await api.createDoc(new App(appName, appVersion, new Date()))) as App
         }
+        if(!app.rollback_webhook){
+            app.rollback_webhook = await api.createWebhook('rollbackMigration')
+        }
         await app.migrate(api!)
+    }
+
+    static async rollback_migration(api: Api, n_migrations:number) : Promise<void> {
+        let app:App = await api.executeQuery(App, {}).then((apps:App[])=>apps[0]!)
+        await app.rollback_migration(api!, n_migrations)
     }
     
     async migrate(api: Api, migrationDir: string = path.join(__dirname, "../../migrations")) : Promise<void> {
@@ -88,8 +98,18 @@ export default class App extends Data {
             this.version = appVersion
             this.maintenance = false
             await api.updateDoc(this)
+            console.info(`To rollback migration, call webhook 'POST ${api.url+'/webhooks/'+this.rollback_webhook}' with body '{"n_migrations"=<n_migration_to_rollback>}'`)
         } else {
             console.info("App version is up to date:", appVersion)
+        }
+    }
+
+    async rollback_migration(api: Api, n_migrations: number, migrationDir: string = path.join(__dirname, "../../migrations")) : Promise<void> {
+        const appliedMigrations = (await api.executeQuery(Migration, {})).sort((a:Migration, b:Migration) => a.gt(b) ? -1 : 1)
+        for (let index = 0; index < n_migrations; index++) {
+            const element = appliedMigrations[index];
+            const migrationFile: MigrationFile = await import(path.join(migrationDir, element.path))
+            await migrationFile.down(api)
         }
     }
 }

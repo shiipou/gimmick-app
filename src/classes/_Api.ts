@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Data } from "./_Data";
+import { props } from "./_types";
 
 export type requestApi = {
     url: string,
@@ -40,6 +41,10 @@ export class Api {
     executeQuery<T extends Data>(coll: Class<T>, query): Promise<T[]> {
         return axios.post(`${this.url}/app/colls/${Api.collectionName(coll)}/docs/find`, query, this.options())
             .then(resp => resp.data.map(d => fromJson(coll, d)));
+    }
+    createWebhook(name: string, props: props = {}) {
+        return axios.post(`${this.url}/app/webjooks`, {"action": name, props: props}, this.options())
+            .then(resp => resp.data['uuid'])
     }
 
     private options() {
