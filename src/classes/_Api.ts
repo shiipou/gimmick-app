@@ -42,6 +42,7 @@ export class Api {
         return axios.post(`${this.url}/app/colls/${Api.collectionName(coll)}/docs/find`, query, this.options())
             .then(resp => resp.data.map(d => fromJson(coll, d)));
     }
+    
     createWebhook(name: string, props: props = {}) {
         return axios.post(`${this.url}/app/webhooks`, {"action": name, props: props}, this.options())
             .then(resp => resp.data['uuid'])
