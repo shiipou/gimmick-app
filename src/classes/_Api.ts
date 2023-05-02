@@ -43,7 +43,7 @@ export class Api {
             .then(resp => resp.data.map(d => fromJson(coll, d)));
     }
     createWebhook(name: string, props: props = {}) {
-        return axios.post(`${this.url}/app/webjooks`, {"action": name, props: props}, this.options())
+        return axios.post(`${this.url}/app/webhooks`, {"action": name, props: props}, this.options())
             .then(resp => resp.data['uuid'])
     }
 
